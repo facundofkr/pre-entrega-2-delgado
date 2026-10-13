@@ -1,50 +1,35 @@
-// Definimos el año actual como una constante
-const ANIO_ACTUAL = 2026;
+// Constante en camelCase como pidió el tutor
+const anioActual = 2026;
 
-// Iniciamos pidiendo el primer nombre para evaluar la condición del bucle
+// Pedimos el primer dato para evaluar el bucle
 let nombreUsuario = prompt("Ingresá un nombre para calcular su edad (o escribí 'ESC' para salir):");
 
-// BUCLE WHILE: Se repetirá mientras el usuario no escriba "ESC" y no ponga cancelar
+// Bucle while que contiene los condicionales adentro
 while (nombreUsuario !== "ESC" && nombreUsuario !== null) {
     
-    // Solicitamos los datos numéricos y los convertimos con parseInt()
-    let diaNacimiento = parseInt(prompt("Ingresá el día de nacimiento (ej. 15):"));
-    let mesNacimiento = parseInt(prompt("Ingresá el mes de nacimiento (ej. 8):"));
+    let diaNacimiento = parseInt(prompt("Ingresá el día de nacimiento (1-31):"));
+    let mesNacimiento = parseInt(prompt("Ingresá el mes de nacimiento (1-12):"));
     let anioNacimiento = parseInt(prompt("Ingresá el año de nacimiento (ej. 1983):"));
 
-    // CONDICIONAL (IF/ELSE IF/ELSE) DENTRO DEL BUCLE:
-    // Primero, validamos que los datos ingresados tengan sentido
-    
+    // Condicional para validar los datos ingresados
     if (isNaN(diaNacimiento) || isNaN(mesNacimiento) || isNaN(anioNacimiento)) {
-        // Regla 1: Si alguno de los datos NO es un número (isNaN)
         alert("Error: Por favor, ingresá números válidos para las fechas.");
-    } 
-    else if (anioNacimiento > ANIO_ACTUAL) {
-        // Regla 2: Si el año ingresado está en el futuro
+    } else if (anioNacimiento > anioActual) {
         alert("Error: El año de nacimiento no puede ser mayor al año actual.");
-    } 
-    else {
-        // Si todo está bien, hacemos la lógica secuencial (tu código original)
-        let edadCalculada = ANIO_ACTUAL - anioNacimiento;
-        
-        let mensajeFinal = "Hola " + nombreUsuario + ", naciste el " + diaNacimiento + "/" + mesNacimiento + "/" + anioNacimiento + ".\n" +
-        "Este año cumplís o ya cumpliste " + edadCalculada + " años.";
+    } else {
+        let edadCalculada = anioActual - anioNacimiento;
 
-        // Salida de resultados
-        alert(mensajeFinal);
-        
-        // Reporte en consola
-        console.log("--- Resumen Procesado ---");
-        console.log("Usuario:", nombreUsuario);
-        console.log("Fecha:", diaNacimiento + "/" + mesNacimiento + "/" + anioNacimiento);
-        console.log("Edad calculada:", edadCalculada);
+        // Salida directa en el alert sin crear una variable extra
+        alert("Hola " + nombreUsuario + ", naciste el " + diaNacimiento + "/" + mesNacimiento + "/" + anioNacimiento + ".\nTenés o vas a cumplir " + edadCalculada + " años.");
+
+        // Un único console.log concatenando todos los datos del registro
+        console.log("Usuario: " + nombreUsuario + " | Fecha: " + diaNacimiento + "/" + mesNacimiento + "/" + anioNacimiento + " | Edad: " + edadCalculada);
     }
 
-    // Volvemos a pedir un nombre al final del bucle. 
-    // Si el usuario escribe 'ESC', el bucle while terminará.
-    nombreUsuario = prompt("Ingresá OTRO nombre para calcular (o escribí 'ESC' para salir del simulador):");
+    // Volvemos a preguntar para decidir si sigue el bucle o corta
+    nombreUsuario = prompt("Ingresá OTRO nombre para calcular (o escribí 'ESC' para salir):");
 }
 
-// Salida final al terminar el bucle
+// Mensaje de cierre al salir del bucle
 alert("Gracias por usar el Simulador de Edades. ¡Nos vemos!");
-console.log("Simulador finalizado por el usuario.");
+console.log("Simulador finalizado correctamente.");
