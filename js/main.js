@@ -1,35 +1,42 @@
-// Constante en camelCase como pidió el tutor
 const anioActual = 2026;
+let continuarSimulador = true;
 
-// Pedimos el primer dato para evaluar el bucle
-let nombreUsuario = prompt("Ingresá un nombre para calcular su edad (o escribí 'ESC' para salir):");
+while (continuarSimulador === true) {
+    let nombreUsuario = prompt("Ingresá un nombre para calcular su edad (o escribí 'ESC' para salir):");
 
-// Bucle while que contiene los condicionales adentro
-while (nombreUsuario !== "ESC" && nombreUsuario !== null) {
-    
-    let diaNacimiento = parseInt(prompt("Ingresá el día de nacimiento (1-31):"));
-    let mesNacimiento = parseInt(prompt("Ingresá el mes de nacimiento (1-12):"));
-    let anioNacimiento = parseInt(prompt("Ingresá el año de nacimiento (ej. 1983):"));
-
-    // Condicional para validar los datos ingresados
-    if (isNaN(diaNacimiento) || isNaN(mesNacimiento) || isNaN(anioNacimiento)) {
-        alert("Error: Por favor, ingresá números válidos para las fechas.");
-    } else if (anioNacimiento > anioActual) {
-        alert("Error: El año de nacimiento no puede ser mayor al año actual.");
-    } else {
-        let edadCalculada = anioActual - anioNacimiento;
-
-        // Salida directa en el alert sin crear una variable extra
-        alert("Hola " + nombreUsuario + ", naciste el " + diaNacimiento + "/" + mesNacimiento + "/" + anioNacimiento + ".\nTenés o vas a cumplir " + edadCalculada + " años.");
-
-        // Un único console.log concatenando todos los datos del registro
-        console.log("Usuario: " + nombreUsuario + " | Fecha: " + diaNacimiento + "/" + mesNacimiento + "/" + anioNacimiento + " | Edad: " + edadCalculada);
+    if (nombreUsuario === null || nombreUsuario.toUpperCase() === "ESC") {
+        continuarSimulador = false;
+        break;
     }
 
-    // Volvemos a preguntar para decidir si sigue el bucle o corta
-    nombreUsuario = prompt("Ingresá OTRO nombre para calcular (o escribí 'ESC' para salir):");
+    if (nombreUsuario.trim() === "" || !isNaN(nombreUsuario)) {
+        alert("Error: El nombre solo puede contener letras y no puede estar vacío.");
+        continue;
+    }
+
+    let diaNacimiento = parseInt(prompt("Ingresá el día de nacimiento de " + nombreUsuario + " (1-31):"));
+    if (isNaN(diaNacimiento) || diaNacimiento < 1 || diaNacimiento > 31) {
+        alert("Error: Tenés que ingresar un número válido entre 1 y 31 para el día.");
+        continue;
+    }
+
+    let mesNacimiento = parseInt(prompt("Ingresá el mes de nacimiento (1-12):"));
+    if (isNaN(mesNacimiento) || mesNacimiento < 1 || mesNacimiento > 12) {
+        alert("Error: Tenés que ingresar un número válido entre 1 y 12 para el mes.");
+        continue;
+    }
+
+    let anioNacimiento = parseInt(prompt("Ingresá el año de nacimiento (ej. 1983):"));
+    if (isNaN(anioNacimiento) || anioNacimiento > anioActual || anioNacimiento < 1900) {
+        alert("Error: Tenés que ingresar un año válido en números (entre 1900 y " + anioActual + ").");
+        continue;
+    }
+
+    let edadCalculada = anioActual - anioNacimiento;
+
+    alert("Hola " + nombreUsuario + ", naciste el " + diaNacimiento + "/" + mesNacimiento + "/" + anioNacimiento + ".\nTenés o vas a cumplir " + edadCalculada + " años.");
+    console.log("Usuario: " + nombreUsuario + " | Fecha: " + diaNacimiento + "/" + mesNacimiento + "/" + anioNacimiento + " | Edad: " + edadCalculada);
 }
 
-// Mensaje de cierre al salir del bucle
 alert("Gracias por usar el Simulador de Edades. ¡Nos vemos!");
 console.log("Simulador finalizado correctamente.");
